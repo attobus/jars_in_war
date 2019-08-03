@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.6.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>demo.jars_in_war</groupId>
+	<artifactId>app</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>app</name>
+	<description>Two jars in the war</description>
+
+	<packaging>war</packaging>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+  
+		<dependency>
+			<groupId>demo.jars_in_war</groupId>
+			<artifactId>jarA</artifactId>
+			<version>0.0.1-xml</version>
+		</dependency>
+		<dependency>
+			<groupId>demo.jars_in_war</groupId>
+			<artifactId>jarB</artifactId>
+			<version>0.0.1-xml</version>
+		</dependency>
+  
+	</dependencies>
+ 
+	<repositories>
+		<repository>
+			<id>local-maven-repo</id>
+			<url>file:///${basedir}/local-maven-repo</url>
+		</repository>
+	</repositories>
+ 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- 
+		 mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=../methodA/target/jarA-0.0.1-xml.jar -DgroupId=demo.jars_in_war -DartifactId=jarA -Dversion=0.0.1-xml -Dpackaging=jar -DlocalRepositoryPath=${basedir}/local-maven-repo 
+		 mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=../methodB/target/jarB-0.0.1-xml.jar -DgroupId=demo.jars_in_war -DartifactId=jarB -Dversion=0.0.1-xml -Dpackaging=jar -DlocalRepositoryPath=${basedir}/local-maven-repo 
+	-->
+
+</project>
